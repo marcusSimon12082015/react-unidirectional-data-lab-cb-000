@@ -1,27 +1,28 @@
 'use strict';
 
-const EventEmitter = require('events').EventEmitter;
-
-export default class Store extends EventEmitter{
+export default class Store{
   constructor(initialState){
     this.state = initialState;
-    super();
+    this.listeners = [];
   }
 
-  addListener(listener){
-    EventEmitter.prototype.addListener.call(this,'change',listener);
-  }
+  addListener (listener) {
+      this.listeners.push(listener);
+      const removeListener = () => {
+        this.listeners = this.listeners
+          .filter(l => listener !== l);
+      };
+      return removeListener;
+    }
 
-  removeListener (listener) {
-   EventEmitter.prototype.removeListener.call(this, 'change', listener)
-  }
+    setState (state) {
+      this.state = state;
+      for (const listener of this.listeners) {
+        listener.call(this, state);
+      }
+    }
 
-  setState(state){
-    this.emit('change', state);
-    this.state = state;
-  }
-
-  getState(){
-    return this.state;
-  }
+    getState () {
+      return this.state;
+    }
 }
