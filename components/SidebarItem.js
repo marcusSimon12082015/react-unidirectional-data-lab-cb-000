@@ -11,14 +11,17 @@ export default class SidebarItem extends React.Component {
 
   render() {
     const {key,file,isSelected,onClick} = this.props;
-    let fileExists = 'Untitled';
-    if (file !== undefined) {
+    let fileExists = '';
+    if (file !== undefined && file !== '') {
       fileExists = this.constructor.getTitle(file);
     }
     return (
       <li className={isSelected ? 'sidebar__item--selected' : 'sidebar__item'}>
         <a className='sidebar__link' onClick={onClick}>
-          {fileExists === 'Untitled' ? <em>{fileExists}</em> : fileExists}
+          {fileExists === ''
+            ? <em>Untitled</em>
+            :fileExists
+          }
         </a>
       </li>
     );
