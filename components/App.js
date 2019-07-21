@@ -19,7 +19,7 @@ export default class App extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
-    this.handleRemove = this.handleRemove.bind(this);  
+    this.handleRemove = this.handleRemove.bind(this);
   }
   componentDidMount() {
     //fileStore.addListener(this.listener);
