@@ -9,11 +9,22 @@ import fileStore from '../stores/fileStore';
 import actions from '../actions';
 
 export default class App extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = fileStore.getState();
+    
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
+    this.handleAdd = this.handleAdd.bind(this);
+    this.handleRemove = this.handleRemove.bind(this);
+
+    //this.listener = this.listener.bind(this);
+  }
   componentDidMount() {
-    // TODO
+    //fileStore.addListener(this.listener);
   }
   componentWillUnmount() {
-    // TODO
+    //fileStore.removeListener(this.listener);
   }
   handleChange(ev) {
     const { selectedFileIndex } = this.state;

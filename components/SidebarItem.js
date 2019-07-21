@@ -8,10 +8,17 @@ export default class SidebarItem extends React.Component {
     // Find first non-empty line and use as title.
     return file.split('\n').find(line => line.length);
   }
+
   render() {
+    const {key,file,isSelected,onClick} = this.props;
+    let fileExists = 'Untitled';
+    if (file !== undefined) {
+      fileExists = this.constructor.getTitle(file);
+    }
     return (
-      <li>
-        <a>
+      <li className={isSelected ? 'sidebar__item--selected' : 'sidebar__item'}>
+        <a className='sidebar__link' onClick={onClick}>
+          {fileExists === 'Untitled' ? <em>{fileExists}</em> : fileExists}
         </a>
       </li>
     );
