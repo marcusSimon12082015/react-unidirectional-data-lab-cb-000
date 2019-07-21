@@ -22,10 +22,12 @@ export default class App extends React.Component {
     this.handleRemove = this.handleRemove.bind(this);
   }
   componentDidMount() {
-    //fileStore.addListener(this.listener);
+    this.removeListener = fileStore.addListener((files) => {
+        this.setState({ files });
+    });
   }
   componentWillUnmount() {
-    //fileStore.removeListener(this.listener);
+    this.removeListener();
   }
   handleChange(ev) {
     const { selectedFileIndex } = this.state;
